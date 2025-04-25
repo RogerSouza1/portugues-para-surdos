@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
 import { supabase } from "../../lib/supabase";
 import { Session } from "@supabase/supabase-js";
 import Auth from "../components/Auth";
 import Account from "../components/Account";
 import Home from "../components/Home";
 import OnBoarding from "../components/OnBoarding";
-import { StatusBar } from "react-native";
 
-// Importes para a navegação de tela
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -37,7 +35,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor="rgb(20, 65, 127)" barStyle="light-content" />
+      <StatusBar backgroundColor="rgb(20, 65, 127)"/>
       <Stack.Navigator initialRouteName="Home">
         {/* Tela de autenticação ou conta */}
         {session && session.user ? (
@@ -52,7 +50,9 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ headerShown: false }}
+          options={{ 
+            headerShown: false,
+          }}
         />
         <Stack.Screen
           name="OnBoarding"
@@ -66,6 +66,7 @@ export default function App() {
               fontWeight: "bold",
             },
             title: "OnBoarding",
+            headerBackTitle: ""
           }}
         />
       </Stack.Navigator>

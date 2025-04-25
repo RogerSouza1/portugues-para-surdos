@@ -12,7 +12,6 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.topSection}>
           <View style={styles.logoContainer}>
@@ -29,7 +28,6 @@ const Home = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
   );
 };
 

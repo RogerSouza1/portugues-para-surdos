@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   indicator: {
-    width: 10,
-    height: 10,
+    width: 30,
+    height: 7,
     borderRadius: 5,
     backgroundColor: "#ccc",
     marginHorizontal: 5,
