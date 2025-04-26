@@ -12,6 +12,7 @@ const Home = () => {
   };
 
   return (
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.topSection}>
           <View style={styles.logoContainer}>
@@ -28,6 +29,7 @@ const Home = () => {
           </TouchableOpacity>
         </View>
       </View>
+    </SafeAreaView>
   );
 };
 
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F7F9FA",
   },
   topSection: {
-    backgroundColor: "rgb(20, 65, 127)",
+    backgroundColor: "#013974",
     borderBottomLeftRadius: 120,
     borderBottomRightRadius: 120,
     alignItems: "center",
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   logoContainer: {
-    backgroundColor: "rgb(20, 65, 127)",
+    backgroundColor: "#013974",
     borderRadius: 100,
     padding: 24,
     marginBottom: 16,
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "#0B2C53",
+    backgroundColor: "#013974",
     paddingVertical: 16,
     paddingHorizontal: 48,
     borderRadius: 18,
