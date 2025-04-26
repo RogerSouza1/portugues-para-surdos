@@ -1,20 +1,65 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Vibration,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ImageExercicio from "../components/ImageExercicio";
+import NextButton from "../components/NextButton";
 
-const Exercicios = ({ navigation }: any) => {
-  const handleNavigateBack = () => {
-    navigation.goBack();
+const Exercicios = () => {
+  const correctWord = "Andressa";
+  const options = ["Luiza", "Andressa", "Jojo", "Paola"];
+
+  const [selectedWord, setSelectedWord] = useState<string | null>(null);
+
+  const handleWordPress = (word: string) => {
+    setSelectedWord(word);
+  };
+
+  const handleCheck = () => {
+    if (selectedWord === correctWord) {
+      Vibration.vibrate([0, 200, 100, 200]);
+      alert("Correto!");
+    } else {
+      Vibration.vibrate(100);
+      alert("Tente novamente!");
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.title}>Tela de Exercícios</Text>
-        <TouchableOpacity style={styles.button} onPress={handleNavigateBack}>
-          <Text style={styles.buttonText}>Voltar</Text>
-        </TouchableOpacity>
+      <ImageExercicio image={require("../../assets/images/image1.jpg")} />
+
+      <View style={styles.phraseContainer}>
+        <Text style={styles.phrase}>
+          <Text style={styles.blank}>{selectedWord || "____"}</Text> Urach!
+        </Text>
       </View>
+
+      <View style={styles.optionsContainer}>
+        {options.map((word) => (
+          <TouchableOpacity
+            key={word}
+            style={[
+              styles.wordButton,
+              selectedWord === word && styles.wordButtonSelected,
+            ]}
+            onPress={() => handleWordPress(word)}
+            disabled={selectedWord === word}
+          >
+            <Text style={styles.wordText}>{word}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <NextButton
+        onPress={handleCheck}
+        direction="right"
+      />
     </SafeAreaView>
   );
 };
@@ -23,37 +68,55 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F7F9FA",
-    justifyContent: "center",
     alignItems: "center",
+    padding: 20,
   },
-  content: {
-    alignItems: "center",
-    paddingHorizontal: 20,
+  image: {
+    width: 140,
+    height: 140,
+    marginBottom: 20,
   },
-  title: {
-    fontSize: 24,
+  phraseContainer: {
+    marginBottom: 30,
+  },
+  phrase: {
+    fontSize: 22,
     fontWeight: "bold",
     color: "#013974",
-    marginBottom: 20,
-  },
-  description: {
-    fontSize: 16,
-    color: "#333",
     textAlign: "center",
-    marginBottom: 20,
+    marginTop: 30,
   },
-  button: {
-    width: 200,
-    height: 50,
-    backgroundColor: "#013974",
+  blank: {
+    borderBottomWidth: 2,
+    borderColor: "#FFD600",
+    paddingHorizontal: 12,
+    color: "#013974",
+  },
+  optionsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
+    marginBottom: 40,
   },
-  buttonText: {
-    color: "#FFF",
+  wordButton: {
+    backgroundColor: "#FFF",
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: "#E3E8EE",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    margin: 8,
+    minWidth: 90,
+    alignItems: "center",
+  },
+  wordButtonSelected: {
+    backgroundColor: "#E3E8EE",
+    borderColor: "#58CC02",
+  },
+  wordText: {
     fontSize: 18,
-    fontWeight: "bold",
+    color: "#013974",
+    fontWeight: "500",
   },
 });
 
