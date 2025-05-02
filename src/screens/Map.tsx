@@ -1,24 +1,25 @@
 import React, {useState, useEffect} from "react";
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { buscarUsuarios } from "../services/supabaseQueries";
+import { buscarModulo } from "../services/supabaseQueries";
+import ModuloCard, { Modulo } from "../components/ModuloCard";
 
 const Map = ({ navigation }: any) => {
-  const [usuarios, setUsuarios] = useState<any[]>([]);
+  const [modulos, setModulos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadUsuarios() {
+    async function loadModulos() {
       try {
-        const data = await buscarUsuarios();
-        setUsuarios(data);
+        const data = await buscarModulo();
+        setModulos(data);
       } catch (error: any) {
-        console.error("Erro ao buscar usuários:", error);
+        console.error("Erro ao buscar modulos:", error);
       } finally {
         setLoading(false);
       }
     }
-    loadUsuarios();
+    loadModulos();
   }, []);
 
   const handleNavigateToLevels = () => {
@@ -34,19 +35,11 @@ const Map = ({ navigation }: any) => {
           <ActivityIndicator size="large" color="#0000ff" />
         ) : (
           <FlatList
-            data={usuarios}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <View style={{ alignItems: "center", marginBottom: 10 }}>
-                <Image source={{ uri: item.avatar_url }} style={{ width: 50, height: 50, borderRadius: 25, marginBottom: 5 }} />
-                <Text style={styles.userItem}>
-                  {item.full_name}: {item.username} - {item.website}
-                </Text>
-              </View>
-              
-            )}
-            contentContainerStyle={styles.listContainer}
-          />
+              data={modulos}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => <ModuloCard modulo={item} />}
+              contentContainerStyle={styles.listContainer}
+            />
         )}
 
         <TouchableOpacity style={styles.rectangle} onPress={handleNavigateToLevels}>

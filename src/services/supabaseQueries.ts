@@ -1,12 +1,9 @@
 import { supabase } from '../../lib/supabase';
 
-export async function buscarModulo(tema: string) {
-    tema.toLowerCase();
-    tema.trim();
+export async function buscarModulo() {
     const { data, error } = await supabase
     .from('modulo')
     .select('*')
-    .eq('tema', tema);
   if (error) throw error;
   return data;
 }
