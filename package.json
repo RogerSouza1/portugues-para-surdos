@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "postinstall": "rn-nodeify --install crypto,stream,os --hack"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
@@ -21,9 +22,11 @@
     "portugues-para-surdos": "file:",
     "react": "18.3.1",
     "react-native": "0.76.9",
+    "react-native-crypto": "^2.2.0",
     "react-native-dotenv": "^3.4.11",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-paper": "^5.14.0",
+    "react-native-randombytes": "^3.6.1",
     "react-native-reanimated": "~3.16.1",
     "react-native-safe-area-context": "^4.14.1",
     "react-native-screens": "~4.4.0",
@@ -33,6 +36,7 @@
     "@babel/core": "^7.25.2",
     "@react-native-community/cli": "latest",
     "@types/react": "~18.3.12",
+    "rn-nodeify": "^10.3.0",
     "typescript": "^5.3.3"
   },
   "private": true
